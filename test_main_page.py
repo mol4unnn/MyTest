@@ -34,4 +34,4 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page2(browser):
     page = MainPage(browser, link)
     page.open()
     page.guest_cant_see_product_in_basket_opened_from_main_page()
-    assert page.is_element_present(*ProductPageLocators.TXT_BUSKET_EMPTY), "dfd"
+    assert page.is_element_present(*ProductPageLocators.TXT_BUSKET_EMPTY), "Busket must be empty"

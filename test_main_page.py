@@ -34,5 +34,4 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page2(browser):
     page = MainPage(browser, link)
     page.open()
     page.guest_cant_see_product_in_basket_opened_from_main_page()
-    TXT_BUSKET_EMPTY = browser.find_element(By.CSS_SELECTOR, "div#content_inner p").text
-    assert TXT_BUSKET_EMPTY == "Your basket is empty. Continue shopping", "Busket must be empty"
+    assert page.is_element_present(*ProductPageLocators.TXT_BUSKET_EMPTY), "dfd"

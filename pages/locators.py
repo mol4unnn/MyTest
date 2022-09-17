@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
@@ -18,7 +21,7 @@ class ProductPageLocators():
     BASKET_ADD_BTN = (By.CLASS_NAME, "btn-add-to-basket")
     BTN_BASKET_SHAPKA = (By.CLASS_NAME, "btn-group a")
     BTN_PROCEED_CHECKOUT = (By.CLASS_NAME, "btn.btn-lg.btn-primary.btn-block")
-    TXT_BUSKET_EMPTY = (By.CSS_SELECTOR, "div#content_inner p")
+    TXT_BUSKET_EMPTY = (By.ID, "content_inner")
 
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")

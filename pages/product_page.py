@@ -1,7 +1,11 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
+
     def should_be_add_to_basket_btn(self):
         assert self.is_element_present(*ProductPageLocators.BASKET_ADD_BTN), "Add to basket button isn't presented"
 
@@ -27,3 +31,11 @@ class ProductPage(BasePage):
             if item_strong.text == product_name:
                 names_equal = True
         assert names_equal, "Names of product isn't equal"
+
+    def guest_cant_see_success_message_after_adding_product_to_basket(self):
+        assert self.is_not_element_present(*ProductPageLocators.BASKET_TOTAL), \
+            "Success message is presented, but should not be"
+
+    def message_disappeared_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.BASKET_TOTAL), \
+            "Success message is presented, but should not be"

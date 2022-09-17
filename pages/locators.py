@@ -16,3 +16,10 @@ class ProductPageLocators():
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
     BASKET_ADD_BTN = (By.CLASS_NAME, "btn-add-to-basket")
+    BTN_BASKET_SHAPKA = (By.CLASS_NAME, "btn-group a")
+    BTN_PROCEED_CHECKOUT = (By.CLASS_NAME, "btn.btn-lg.btn-primary.btn-block")
+    TXT_BUSKET_EMPTY = (By.CSS_SELECTOR, "div#content_inner p")
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")

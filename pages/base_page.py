@@ -1,11 +1,12 @@
 import time
-
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import NoAlertPresentException # в начале файла
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import math
+from .locators import BasePageLocators
+from .locators import ProductPageLocators
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
@@ -23,6 +24,15 @@ class BasePage():
             return False
         return True
 
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
+        login_link.click()
+
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+
     def solve_quiz_and_get_code(self):
         WebDriverWait(self.browser, 3).until(EC.alert_is_present())
         alert = self.browser.switch_to.alert
@@ -36,6 +46,27 @@ class BasePage():
             alert_text = alert.text
             print(f"Your code: {alert_text}")
             alert.accept()
-            time.sleep(60)
+            #time.sleep(60)
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+#
+        return False
+
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+
+        return True
+
+    def guest_cant_see_product_in_basket_opened_from_main_page(self):
+        btn_busket = self.browser.find_element(*ProductPageLocators.BTN_BASKET_SHAPKA)
+        btn_busket.click()
